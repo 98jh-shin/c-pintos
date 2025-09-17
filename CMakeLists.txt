@@ -20,6 +20,8 @@ include_directories(pintos/tests/threads)
 include_directories(pintos/tests/userprog)
 include_directories(pintos/tests/vm)
 
+target_compile_definitions(pintos PRIVATE USERPROG)
+
 add_executable(c_pintos
         pintos/devices/disk.c
         pintos/devices/input.c
