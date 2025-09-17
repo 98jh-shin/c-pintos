@@ -1,0 +1,28 @@
+{
+    "files.associations": {
+        "process.h": "c",
+        "thread.h": "c",
+        "vaddr.h": "c",
+        "stdio.h": "c",
+        "stdint.h": "c",
+        "list.h": "c",
+        "debug.h": "c",
+        "string.h": "c",
+        "malloc.h": "c",
+        "interrupt.h": "c",
+        "synch.h": "c",
+        "pte.h": "c",
+        "timer.h": "c",
+        "intrinsic.h": "c",
+        "intr-stubs.h": "c",
+        "palloc.h": "c",
+        "stddef.h": "c",
+        "random.h": "c",
+        "flags.h": "c",
+        "file.h": "c"
+    },
+    "editor.formatOnSave": true,
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "C_Cpp.clang_format_sortIncludes": true,
+    "C_Cpp.clang_format_style": "file"
+}

@@ -31,3 +31,8 @@ core
 
 # VSCode
 .vscode/
+.idea
+/CMakeLists.txt
+/.devcontainer/devcontainer.json
+/.devcontainer/Dockerfile
+/.clang-format
