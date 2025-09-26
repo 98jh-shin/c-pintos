@@ -225,6 +225,7 @@ static void __do_fork(void* aux) {
 #else
   if (!pml4_for_each(parent->pml4, duplicate_pte, parent)) goto error;
 #endif
+    //테스트용 주석
 
   process_init();
 
