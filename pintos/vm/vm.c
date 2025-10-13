@@ -157,7 +157,18 @@ void spt_remove_page(struct supplemental_page_table *spt, struct page *page) {
 /* Get the struct frame, that will be evicted. */
 static struct frame *vm_get_victim(void) {
   struct frame *victim = NULL;
-  /* TODO: The policy for eviction is up to you. */
+
+  lock_acquire(&frame_lock);
+  for (next = list_begin(&frame_table); next != list_end(&frame_table); next = list_next(next)) {
+    victim = list_entry(next, struct frame, frame_elem);
+    if (pml4_is_accessed(thread_current()->pml4, victim->page->va))
+      pml4_set_accessed(thread_current()->pml4, victim->page->va, false);
+    else {
+      lock_release(&frame_lock);
+      return victim;
+    }
+  }
+  lock_release(&frame_lock);
 
   return victim;
 }
@@ -165,8 +176,10 @@ static struct frame *vm_get_victim(void) {
 /* Evict one page and return the corresponding frame.
  * Return NULL on error.*/
 static struct frame *vm_evict_frame(void) {
-  struct frame *victim UNUSED = vm_get_victim();
-  /* TODO: swap out the victim and return the evicted frame. */
+  struct frame *victim = vm_get_victim();
+  if (victim->page)
+    swap_out(victim->page);
+  return victim;
 
   return NULL;
 }
