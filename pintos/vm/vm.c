@@ -234,6 +234,22 @@ static void vm_stack_growth(void *addr UNUSED) {
 
 /* Handle the fault on write_protected page */
 static bool vm_handle_wp(struct page *page UNUSED) {
+  if (!page->accessible)
+    return false;
+
+  void *kva = page->frame->kva;
+
+  page->frame->kva = palloc_get_page(PAL_USER | PAL_ZERO);
+
+  if (page->frame->kva == NULL)
+    page->frame = vm_evict_frame();
+
+  memcpy(page->frame->kva, kva, PGSIZE);
+
+  if (!pml4_set_page(thread_current()->pml4, page->va, page->frame->kva, page->accessible))
+    return false;
+
+  return true;
 }
 
 /* Return true on success */
