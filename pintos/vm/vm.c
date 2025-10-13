@@ -8,6 +8,7 @@
 
 static struct list frame_table;  // 구조체 추가
 struct lock frame_lock;
+struct list_elem *next = NULL;
 static bool is_valid_stack_access(void *addr, const uintptr_t rsp);
 
 /* Initializes the virtual memory subsystem by invoking each subsystem's
