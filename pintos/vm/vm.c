@@ -22,6 +22,7 @@ void vm_init(void) {
   /* DO NOT MODIFY UPPER LINES. */
   /* TODO: Your code goes here. */
   list_init(&frame_table);  // 구조체 초기화
+  lock_init(&frame_lock);
 }
 
 /* Get the type of the page. This function is useful if you want to know the
