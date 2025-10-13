@@ -231,6 +231,8 @@ rollback:
   free(region);
   return NULL;
 }
+static void *find_free_address(struct thread *t, size_t length) {
+  size_t page_count = (length + PGSIZE - 1) / PGSIZE;
 
 /* Do the munmap */
 void do_munmap(void *addr) {
