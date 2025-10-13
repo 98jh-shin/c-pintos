@@ -61,6 +61,7 @@ struct page {
   };
   struct hash_elem hash_elem;  // hash_elem 추가
   bool writable;               // bool 변수 추기
+  bool accessible;
 };
 
 /* The representation of "frame" */
